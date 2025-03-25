@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PolicyInfo from "../../../backend/models/PolicyInfo";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const SearchPolicy = () => {
   const [username, setUsername] = useState("");
@@ -18,7 +19,9 @@ const SearchPolicy = () => {
       setPolicyInfo(null);
 
       const response = await axios.get(
-        `http://localhost:3001/api/users/search-policy?username=${username}`
+      //  `http://localhost:3001/api/users/search-policy?username=${username}`
+
+        `${backendUrl}/api/users/search-policy?username=${username}`,
       );
 
       if (response.status === 200) {

@@ -1,5 +1,7 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function FileUpload() {
   const [file, setFile] = useState(null);
@@ -22,7 +24,9 @@ function FileUpload() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/upload",
+        `${backendUrl}/upload`,
+
+        // "http://localhost:3001/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -31,7 +35,7 @@ function FileUpload() {
       setMessage(response.data.message);
     } catch (error) {
       setMessage("Error uploading file", error);
-     // console.log("reached catch")
+      // console.log("reached catch")
     }
     setLoading(false);
   };
